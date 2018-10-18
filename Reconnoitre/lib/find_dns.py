@@ -1,6 +1,5 @@
 import subprocess
-import sys
-import os
+
 from file_helper import check_directory
 from file_helper import load_targets
 
@@ -10,7 +9,7 @@ def find_dns(target_hosts, output_directory, quiet):
     results = 0
     hostcount = 0
     dnscount = 0
-    
+
     output_file = open(output_directory + "/DNS-Detailed.txt", 'w')
     output_targets = open(output_directory + "/DNS-targets.txt", 'w')
 
@@ -27,13 +26,13 @@ def find_dns(target_hosts, output_directory, quiet):
 
         print("   [>] Testing %s for DNS" % ip_address)
         DNSSCAN = "nmap -n -sV -Pn -vv -p53 %s" % (ip_address)
-        results = subprocess.check_output(DNSSCAN, shell=True)
+        results = subprocess.check_output(DNSSCAN, shell=True).decode("utf-8")
         lines = results.split("\n")
 
         for line in lines:
             line = line.strip()
             line = line.rstrip()
-            if ("53/tcp" in line) and ("open" in line):
+            if ("53/tcp" in line) and ("open" in line) and ("Discovered" not in line):
                 print("      [=] Found DNS service running on: %s" % (ip_address))
                 output_file.write("[*] Found DNS service running on: %s\n" % (ip_address))
                 output_file.write("   [>] %s\n" % (line))

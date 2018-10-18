@@ -1,4 +1,4 @@
-![Reconnnoitre](https://github.com/codingo/Reconnoitre/blob/master/tank-152362_640.png)
+![Reconnnoitre](https://github.com/codingo/Reconnoitre/blob/master/assets/tank-152362_640.png)
 A reconnaissance tool made for the OSCP labs to automate information gathering and service enumeration whilst creating a directory structure to store  results, findings and exploits used for each host, recommended commands to execute and directory structures for storing loot and flags.
 
 Contributions are more than welcome!
@@ -8,6 +8,22 @@ Contributions are more than welcome!
 # Credit
 
 This tool is based heavily upon the work made public in Mike Czumak's (T_v3rn1x) OSCP review ([link](https://www.securitysift.com/offsec-pwb-oscp/)) along with considerable influence and code taken from Re4son's mix-recon ([link](https://whitedome.com.au/re4son/category/re4son/oscpnotes/)). Virtual host scanning is originally adapted from teknogeek's work which is heavily influenced by jobertabma's virtual host discovery script ([link](https://github.com/jobertabma/virtual-host-discovery)). Further Virtual Host scanning code has been adapted from a project by Tim Kent and I, available here ([link](https://github.com/codingo/VHostScan)).
+
+# Installation
+To install Reconnoitre first make a local copy of the repository by performing the following where you wish it to be located:
+
+```
+git clone https://github.com/codingo/Reconnoitre.git
+```
+After you have done this run setup.py with the following:
+```
+python setup.py install
+```
+
+After setup has run Reconnoitre will now be in your path (as reconnoitre) and you can launch it anywhere using:
+```
+reconnoitre <args>
+```
 
 # Usage
 
@@ -19,9 +35,8 @@ This tool can be used and copied for personal use freely however attribution and
 | -t TARGET_HOSTS | Set either a target range of addresses or a single host to target. May also be a file containing hosts. |
 | -o OUTPUT_DIRECTORY | Set the target directory where results should be written. |
 | -w WORDLIST | Optionally specify your own wordlist to use for pre-compiled commands, or executed attacks. |
-| --dns DNS_SERVER | Optionally specify a DNS server to use with a service scan. |
 | --pingsweep | Write a new target.txt file in the OUTPUT_DIRECTORY by performing a ping sweep and discovering live hosts. |
-| --dnssweep | Find DNS servers from the list of target(s). |
+| --dns, --dnssweep | Find DNS servers from the list of target(s). |
 | --snmp | Find hosts responding to SNMP requests from the list of target(s). |
 | --services | Perform a service scan over the target(s) and write recommendations for further commands to execute. |
 | --hostnames | Attempt to discover target hostnames and write to hostnames.txt. |
@@ -29,8 +44,6 @@ This tool can be used and copied for personal use freely however attribution and
 | --ignore-http-codes | Comma separated list of http codes to ignore with virtual host scans. |
 | --ignore-content-length | Ignore content lengths of specificed amount. This may become useful when a server returns a static page on every virtual host guess. |
 | --quiet | Supress banner and headers and limit feedback to grepable results. |
-| --exec | Execute shell commands from recommendations as they are discovered. Likely to lead to very long execution times depending on the wordlist being used and discovered vectors. |
-| --simple_exec | Execute non-brute forcing shell comamnds only commands as they are discovered. Likely to lead to very long execution times depending on the wordlist being used and discovered vectors. |
 | --quick | Move to the next target after performing a quick scan and writing first-round recommendations. |
 | --no-udp | Disable UDP service scanning, which is ON by default. |
 
